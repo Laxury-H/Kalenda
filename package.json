@@ -1,0 +1,28 @@
+{
+  "name": "kalenda",
+  "version": "1.0.0",
+  "description": "A Web3 marketplace on Solana blockchain to tokenize and sell your time as NFTs",
+  "scripts": {
+    "dev": "concurrently \"npm run anchor-dev\" \"npm run frontend-dev\" \"npm run backend-dev\"",
+    "anchor-dev": "cd programs && anchor build && anchor deploy",
+    "frontend-dev": "cd frontend && npm run dev",
+    "backend-dev": "cd backend && npm run start:dev",
+    "test": "concurrently \"npm run anchor-test\" \"npm run frontend-test\" \"npm run backend-test\"",
+    "anchor-test": "cd programs && anchor test",
+    "frontend-test": "cd frontend && npm run test",
+    "backend-test": "cd backend && npm run test"
+  },
+  "keywords": [
+    "solana",
+    "web3",
+    "nft",
+    "marketplace",
+    "calendar",
+    "booking"
+  ],
+  "author": "Kalenda Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

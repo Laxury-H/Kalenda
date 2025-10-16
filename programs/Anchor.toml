@@ -1,0 +1,18 @@
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+kalenda_nft = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+kalenda_marketplace = "HmbTLCywRzJv15YXHnJNRGGAxeYGZEtgc5dkhqd7SBfq"
+kalenda_escrow = "7ZdWJct38emX6aBvC5Zb5zC7anS7v5Dz8qZ6B7dH9qQq"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

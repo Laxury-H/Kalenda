@@ -1,0 +1,22 @@
+[package]
+name = "kalenda-escrow"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "kalenda_escrow"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = "0.28.0"
+anchor-spl = "0.28.0"
+kalenda-nft = { path = "../kalenda-nft", features = ["cpi"] }
+kalenda-marketplace = { path = "../kalenda-marketplace", features = ["cpi"] }

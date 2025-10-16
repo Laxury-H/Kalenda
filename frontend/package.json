@@ -1,0 +1,42 @@
+{
+  "name": "kalenda-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Kalenda - A Web3 marketplace to tokenize and sell your time as NFTs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "nextjs",
+    "solana",
+    "web3",
+    "nft",
+    "calendar"
+  ],
+  "author": "Kalenda Team",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.4.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6",
+    "tailwindcss": "^3.3.3",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "@solana/web3.js": "^1.77.3",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.25"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.46.0",
+    "eslint-config-next": "^13.4.12"
+  }
+}

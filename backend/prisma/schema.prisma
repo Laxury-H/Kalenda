@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  walletAddress String   @unique
+  name          String?
+  avatar        String?
+  bio           String?
+  twitter       String?
+  linkedin      String?
+  website       String?
+  specialties   String[]
+  rating        Float    @default(0.0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  createdTimeSlots TimeSlot[] @relation("CreatorTimeSlots")
+  purchasedTimeSlots TimeSlot[] @relation("BuyerTimeSlots")
+  disputesAsBuyer Dispute[] @relation("DisputesAsBuyer")
+  disputesAsSeller Dispute[] @relation("DisputesAsSeller")
+  notifications Notification[]
+}
+
+model TimeSlot {
+  id          Int      @id @default(autoincrement())
+  creatorId   Int
+  buyerId     Int?
+  startTime   DateTime
+  endTime     DateTime
+  title       String
+  description String
+  price       Float
+  status      TimeSlotStatus @default(AVAILABLE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  creator User @relation("CreatorTimeSlots", fields: [creatorId], references: [id])
+  buyer   User? @relation("BuyerTimeSlots", fields: [buyerId], references: [id])
+  bids    Bid[]
+}
+
+enum TimeSlotStatus {
+  AVAILABLE
+  SOLD
+  COMPLETED
+}
+
+model Bid {
+  id         Int      @id @default(autoincrement())
+  timeSlotId Int
+  bidderId   Int
+  amount     Float
+  createdAt  DateTime @default(now())
+
+  // Relations
+  timeSlot TimeSlot @relation(fields: [timeSlotId], references: [id])
+  bidder   User     @relation(fields: [bidderId], references: [id])
+}
+
+model Dispute {
+  id         Int              @id @default(autoincrement())
+  buyerId    Int
+  sellerId   Int
+  reason     String
+  evidence   String?
+  status     DisputeStatus    @default(OPEN)
+  resolution DisputeResolution?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  // Relations
+  buyer  User @relation("DisputesAsBuyer", fields: [buyerId], references: [id])
+  seller User @relation("DisputesAsSeller", fields: [sellerId], references: [id])
+}
+
+enum DisputeStatus {
+  OPEN
+  RESOLVED
+  CLOSED
+}
+
+enum DisputeResolution {
+  IN_FAVOR_OF_BUYER
+  IN_FAVOR_OF_SELLER
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+}
